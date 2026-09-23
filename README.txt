@@ -1,54 +1,104 @@
-KITSW ATTENDANCE MANAGER — LOCAL DATABASE BUILD
-================================================
+# KITSW Attendance Manager
 
-This is the next engineering stage of the approved prototype.
-It uses a real local SQLite database instead of browser localStorage. Node.js provides the SQLite runtime; a separate SQLite installation is not required for the application itself.
+A desktop-based attendance management system developed to simplify and digitize the daily attendance process for the Head of the Department (HOD).
 
-IMPORTANT
----------
-- No Google/Firebase/cloud database is used.
-- Attendance is stored in data\kitsw_attendance.db on this computer.
-- The database survives browser refreshes and application restarts.
-- The HOD login session is stored locally and remains active until Logout.
-- The first-time HOD sign-up is stored in the database and cannot be repeated.
-- Historical attendance reports store their own snapshot of batch/branch/section/in-charge/strength.
-- Structure changes are versioned by effective date. A change on 20-Aug does not rewrite 12-Aug.
-- The attendance calendar starts at the application launch date (12-Aug-2026). Dates before launch are not part of the application.
-- Past dates from the launch date onward are shown as Pending until saved.
-- Today is editable; future dates are visible in the calendar but locked.
-- A saved report can be opened by selecting its date in the calendar.
-- Saved attendance can be corrected through Modify and saved back to the same date after confirmation.
-- Save/Modify confirmations use an in-app modal rather than browser alert messages.
+## 📌 About the Project
 
-REQUIREMENT
------------
-Install Node.js 22 or newer.
+KITSW Attendance Manager is designed to help an HOD efficiently manage daily student attendance across multiple branches, batches, sections, and academic years.
 
-RUN
+The application provides a centralized interface for managing academic structure, recording daily attendance, calculating attendance statistics, and generating professional attendance reports.
+
+## ✨ Features
+
+- 🔐 HOD authentication and secure access
+- 🏫 Branch, batch, and section management
+- 👩‍🏫 Class in-charge and student strength management
+- 📅 Date-wise attendance management
+- ✅ Present and Absent calculation
+- 📊 Automatic attendance percentage calculation
+- 🔒 Future-date attendance restriction
+- 💾 Local attendance data storage
+- 🔄 Academic structure updates while preserving saved records
+- 📄 Professional one-page PDF attendance report
+- 📈 Automatic totals and overall attendance statistics
+- 🖥️ Standalone Windows desktop application
+- 📦 Windows installer for easy deployment
+
+## 🖥️ Application
+
+The system provides a simple and user-friendly interface for the HOD to:
+
+1. Log in securely.
+2. Manage the academic structure.
+3. Select the required attendance date.
+4. Enter attendance for different sections.
+5. View automatically calculated attendance statistics.
+6. Save the attendance record.
+7. Generate a professional PDF report.
+
+## 📄 Attendance Report
+
+The application generates a professional **A4 landscape attendance report** containing:
+
+- College details
+- Branch-wise attendance
+- Batch and section information
+- Student strength
+- Present count
+- Absent count
+- Attendance percentage
+- Overall totals
+- Report date
+- Professional footer
+
+The complete report is designed to fit on **a single A4 page** for easy printing and departmental documentation.
+
+## 🛠️ Technologies Used
+
+- HTML
+- CSS
+- JavaScript
+- Node.js
+- Electron
+- SQLite
+
+## 🗄️ Database
+
+The application uses a **local SQLite database** to store attendance and academic structure data.
+
+This allows the application to work as a standalone desktop system without requiring a separate cloud database or internet connection for its core attendance functionality.
+
+## 🖥️ Desktop Application
+
+The application is built using **Electron**, allowing the web-based interface to run as a standalone Windows desktop application.
+
+A Windows installer is also provided for convenient installation and deployment.
+
+## 🎯 Project Objective
+
+The main objective of KITSW Attendance Manager is to reduce manual effort in daily attendance management and provide the HOD with a reliable, organized, and easy-to-use system for maintaining attendance records and generating reports.
+
+## 📚 What I Learned
+
+Through this project, I gained practical experience in:
+
+- Desktop application development
+- Electron application development
+- Node.js
+- SQLite database integration
+- Frontend development
+- Data validation
+- Attendance calculation logic
+- PDF report generation
+- Local data management
+- Building software for real-world institutional requirements
+
+## 👩‍💻 Developer
+
+**Umaimah Afzal**
+
+B.Tech Computer Science & Engineering
+
 ---
-Double-click start.bat.
-The app will open at:
-http://127.0.0.1:3000
 
-FIRST USE
----------
-1. Sign Up
-2. Enter the private HOD Access ID: KITSW HOD
-3. Create the HOD password
-4. Login with the password
-5. From then on, reopening the app keeps the HOD session active until Logout.
-
-DATABASE
---------
-The database file is:
-data\kitsw_attendance.db
-
-Do not delete or rename this file if you want to keep the attendance history.
-
-STOP
-----
-Double-click stop.bat when you want to stop the local server.
-
-NEXT PACKAGING STAGE
---------------------
-After the database/UI integration is tested thoroughly, this project can be packaged as a Windows desktop application so the HOD does not need to see localhost, CMD, or Node.js.
+⭐ Developed as a practical software solution for academic attendance management.
