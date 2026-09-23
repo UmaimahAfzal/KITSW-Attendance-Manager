@@ -1,0 +1,43 @@
+{
+  "name": "kitsw-attendance-manager",
+  "version": "1.0.0",
+  "description": "KITSW Attendance Manager - local desktop application",
+  "main": "electron-main.js",
+  "author": "KITSW Attendance Manager",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "43.2.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "com.kitsw.attendance.manager",
+    "productName": "KITSW Attendance Manager",
+    "asar": true,
+    "files": [
+      "**/*",
+      "!data/*.db"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/kitsw.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "KITSW Attendance Manager"
+    }
+  }
+}

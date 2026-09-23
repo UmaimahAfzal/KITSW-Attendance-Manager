@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KITSW Attendance Report</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="toast" class="toast"></div>
+
+  <section id="authScreen" class="auth-screen">
+    <div class="auth-card">
+      <div class="brand-mark"><img src="assets/logo.png" alt="KITSW Logo"></div>
+      <div class="auth-title">
+        <span class="eyebrow">KAKATIYA INSTITUTE OF TECHNOLOGY AND SCIENCE FOR WOMEN</span>
+        <h1>Attendance Report</h1>
+        <p>Daily attendance management dashboard</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button id="signupTab" class="auth-tab active" type="button">Sign Up</button>
+        <button id="loginTab" class="auth-tab" type="button">Login</button>
+      </div>
+
+      <form id="signupForm" class="auth-form">
+        <label>HOD Access ID
+          <input id="signupId" type="password" placeholder="Enter HOD Access ID" autocomplete="username" required>
+        </label>
+        <label>Create Password
+          <input id="signupPassword" type="password" placeholder="Create HOD password" autocomplete="new-password" required>
+        </label>
+        <label>Confirm Password
+          <input id="signupConfirm" type="password" placeholder="Re-enter HOD password" autocomplete="new-password" required>
+        </label>
+        <button class="primary-btn wide" type="submit">Create HOD Account <span>→</span></button>
+        <p class="auth-note">Authorized HOD access only. Enter the access ID provided to you.</p>
+      </form>
+
+      <form id="loginForm" class="auth-form hidden">
+        <label>Password
+          <input id="loginPassword" type="password" placeholder="Enter HOD password" autocomplete="current-password" required>
+        </label>
+        <button class="primary-btn wide" type="submit">Login <span>→</span></button>
+        <p class="auth-note">Authorized HOD access only. Your session stays active until Logout.</p>
+      </form>
+    </div>
+    <div class="auth-footer">Internal Attendance Management • KITSW • HOD Authorized Access</div>
+  </section>
+
+  <section id="appScreen" class="app-shell hidden">
+    <header class="topbar">
+      <div class="topbar-brand">
+        <img src="assets/logo.png" alt="KITSW Logo">
+        <div>
+          <div class="college-name">KAKATIYA INSTITUTE OF TECHNOLOGY AND SCIENCE FOR WOMEN</div>
+          <div class="location">MANIK BHANDAR, NIZAMABAD - 503003</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <div class="user-pill"><span class="user-dot"></span><span id="userName">HOD</span></div>
+        <button id="logoutBtn" class="ghost-btn">Logout</button>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">HOD DASHBOARD</div>
+          <h2>Daily Attendance Report</h2>
+          <p>Enter only the present count. Absentees and percentage are calculated automatically.</p>
+        </div>
+        <div class="date-controls">
+          <button id="prevDay" class="icon-btn" title="Previous day">‹</button>
+          <button id="calendarBtn" class="date-box date-picker-btn" type="button" title="Open attendance calendar"><span>Date</span><strong id="selectedDateLabel">12-08-2026</strong><small id="dayLabel">WEDNESDAY</small><b>⌄</b></button>
+          <button id="nextDay" class="icon-btn" title="Next day">›</button>
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="summary-icon">👥</div>
+          <div><span>Total Strength</span><strong id="totalStrength">0</strong></div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon">✓</div>
+          <div><span>Present</span><strong id="totalPresent">0</strong></div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon">—</div>
+          <div><span>Absent</span><strong id="totalAbsent">0</strong></div>
+        </div>
+        <div class="summary-card accent">
+          <div class="summary-icon">%</div>
+          <div><span>Overall Attendance</span><strong id="overallPercentage">0%</strong></div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="status-area">
+          <span id="saveStatus" class="status-badge draft">● Draft — Not Saved</span>
+          <span id="lastSaved" class="saved-text"></span>
+        </div>
+        <div class="toolbar-actions">
+          <button id="structureBtn" class="secondary-btn">⚙ Manage Structure</button>
+          <button id="printBtn" class="secondary-btn">⎙ Print / PDF</button>
+          <button id="modifyBtn" class="secondary-btn hidden">✎ Modify</button>
+          <button id="saveBtn" class="primary-btn">✓ Save Attendance</button>
+        </div>
+      </div>
+
+      <section class="report-card">
+        <div class="print-header">
+          <div class="print-brand">
+            <img src="assets/logo.png" alt="KITSW Logo">
+            <div class="print-college">
+              <div class="print-college-title">KAKATIYA INSTITUTE OF TECHNOLOGY AND SCIENCE FOR WOMEN</div>
+              <div class="print-affiliation">Affiliated to JNTU Hyderabad</div>
+              <div class="print-address">Manik Bhandar, Nizamabad – 503003</div>
+            </div>
+          </div>
+          <div class="print-report-title">
+            <span class="print-title-small">DAILY</span>
+            <span class="print-title-main">ATTENDANCE<br>REPORT</span>
+          </div>
+        </div>
+
+        <div class="print-info-bar">
+          <div class="print-date-pill">
+            <span>▣</span>
+            <b>REPORT DATE</b>
+            <i>|</i>
+            <strong id="printReportDate">12-08-2026</strong>
+            <i>|</i>
+            <b>DAY</b>
+            <strong id="printDayLabel"></strong>         
+           </div>
+          <div class="print-manager-pill">★&nbsp; KITSW Attendance Manager &nbsp;★</div>
+        </div>
+
+        <div class="report-heading">
+          <div>
+            <span class="eyebrow">OFFICIAL DAILY REPORT</span>
+            <h3>Attendance Details</h3>
+          </div>
+          <div class="report-date-label" id="reportDateLabel">12-08-2026 • WEDNESDAY</div>
+        </div>
+
+        <div class="table-wrap">
+          <table id="attendanceTable">
+            <thead>
+              <tr>
+                <th>S.NO</th>
+                <th>BATCH</th>
+                <th>BRANCH</th>
+                <th>SECTION</th>
+                <th>IN-CHARGE</th>
+                <th>TOTAL STRENGTH</th>
+                <th>PRESENT</th>
+                <th>ABSENT</th>
+                <th>PERCENTAGE</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" class="total-label">TOTAL</td>
+                <td id="footStrength">0</td>
+                <td id="footPresent">0</td>
+                <td id="footAbsent">0</td>
+                <td id="footPercentage">0%</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="print-summary-grid">
+          <div class="print-summary-card strength">
+            <span class="summary-bubble">♟</span>
+            <div><small>TOTAL STRENGTH</small><strong id="printTotalStrength">0</strong></div>
+          </div>
+          <div class="print-summary-card present">
+            <span class="summary-bubble">✓</span>
+            <div><small>TOTAL PRESENT</small><strong id="printTotalPresent">0</strong></div>
+          </div>
+          <div class="print-summary-card absent">
+            <span class="summary-bubble">×</span>
+            <div><small>TOTAL ABSENT</small><strong id="printTotalAbsent">0</strong></div>
+          </div>
+          <div class="print-summary-card percentage">
+            <span class="summary-bubble">%</span>
+            <div><small>OVERALL PERCENTAGE</small><strong id="printOverallPercentage">0%</strong></div>
+          </div>
+          <div class="print-summary-card date">
+            <span class="summary-bubble">▣</span>
+            <div><small>REPORT DATE</small><strong id="printSummaryDate">12-08-2026</strong></div>
+          </div>
+        </div>
+
+        <div class="report-footer">
+          <div>
+            <span>Report Date</span>
+            <strong id="footerDate">12-08-2026</strong>
+          </div>
+          <div>
+            <span>Generated By</span>
+            <strong>KITSW Attendance Manager</strong>
+          </div>
+        </div>
+          <div class="print-footer-line">KITSW Attendance Manager • Daily Attendance Report</div>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <div id="structureModal" class="modal hidden">
+    <div class="modal-card large">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow">CONFIGURATION</span>
+          <h3>Manage Branches & Sections</h3>
+          <p>Edit any row, change strength/in-charge, add sections or branches, or delete a row.</p>
+        </div>
+        <button class="close-btn" data-close="structureModal">×</button>
+      </div>
+      <div class="structure-table-wrap">
+        <table class="structure-table">
+          <thead>
+            <tr><th>Batch</th><th>Branch</th><th>Section</th><th>In-Charge</th><th>Strength</th><th></th></tr>
+          </thead>
+          <tbody id="structureBody"></tbody>
+        </table>
+      </div>
+      <div class="modal-actions">
+        <button id="addRowBtn" class="secondary-btn">＋ Add Section / Branch</button>
+        <div>
+          <button class="secondary-btn" data-close="structureModal">Cancel</button>
+          <button id="applyStructureBtn" class="primary-btn">Apply Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="calendarModal" class="modal hidden"><div class="modal-card calendar-card"><div class="modal-head"><div><span class="eyebrow">ATTENDANCE CALENDAR</span><h3>Select a Date</h3><p>Choose any date to view or enter its attendance.</p></div><button class="close-btn" data-close="calendarModal">×</button></div><div class="calendar-toolbar"><button id="calPrevMonth" class="icon-btn" type="button">‹</button><strong id="calendarMonthLabel"></strong><button id="calNextMonth" class="icon-btn" type="button">›</button></div><div class="calendar-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div id="calendarGrid" class="calendar-grid"></div><div class="calendar-legend"><span><i class="dot pending-dot"></i>Pending</span><span><i class="dot saved-dot"></i>Saved</span><span><i class="dot today-dot"></i>Today</span><span><i class="dot future-dot"></i>Future</span></div></div></div>
+  <div id="confirmModal" class="modal hidden"><div class="modal-card confirm-card"><div class="confirm-icon">✓</div><span class="eyebrow">CONFIRM ACTION</span><h3 id="confirmTitle">Save Attendance?</h3><p id="confirmMessage">Save attendance for this date?</p><div class="confirm-actions"><button id="confirmCancel" class="secondary-btn" type="button">Cancel</button><button id="confirmOk" class="primary-btn" type="button">Save Changes</button></div></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
